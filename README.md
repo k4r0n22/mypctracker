@@ -102,6 +102,6 @@ Recuerda reemplazar `"tuusuario"` y `"ID_UNICO_DE_TU_DISPOSITIVO"` con tus detal
 ```
 ## CAPTURAS
 
-![Texto Alternativo](C:\Users\unkno\Pictures\Screenshots\Captura de pantalla 2023-11-13 040126.png)
+![Texto Alternativo](/src/public/img/index.png)
 
-![Texto Alternativo](C:\Users\unkno\Pictures\Screenshots\Captura de pantalla 2023-11-13 040137.png)
+![Texto Alternativo](/src/public/img/tracker.png)
