@@ -24,8 +24,6 @@ Asegúrate de tener Node.js y npm instalados en tu máquina antes de ejecutar el
    git clone https://github.com/tuusuario/mypctracker.git
    cd mypctracker
 
-```
-
 1. Instala las dependencias:
     
     ```bash
@@ -104,6 +102,6 @@ Recuerda reemplazar `"tuusuario"` y `"ID_UNICO_DE_TU_DISPOSITIVO"` con tus detal
 ```
 ## CAPTURAS
 
-![Texto Alternativo]("C:\Users\unkno\Pictures\Screenshots\Captura de pantalla 2023-11-13 040126.png")
+![Texto Alternativo](C:\Users\unkno\Pictures\Screenshots\Captura de pantalla 2023-11-13 040126.png)
 
-![Texto Alternativo](""C:\Users\unkno\Pictures\Screenshots\Captura de pantalla 2023-11-13 040137.png"")
+![Texto Alternativo](C:\Users\unkno\Pictures\Screenshots\Captura de pantalla 2023-11-13 040137.png)
