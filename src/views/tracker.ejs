@@ -1,0 +1,92 @@
+<!-- En tracker.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rastreador de PC</title>
+    <%- include("partials/head") %>
+
+    <style>
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            width: 100%;
+            margin-top: 7%;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            width: 80%;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .location-info {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .location-image {
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            float: right;
+        }
+
+        p {
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .location-data {
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .no-location {
+            color: #888;
+            text-align: center;
+        }
+
+        /* Media Query para dispositivos con pantalla de hasta 600px (smartphones) */
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include("partials/navigation", { title: "MYPCTRACKER" }) %>
+
+
+    <h1>Rastreo de PC - Última Ubicación</h1>
+    <div class="container">
+        <div class="location-info">
+            <% if (lastLocation) { %>
+                <p>Última ubicación recibida:</p>
+                <pre><%= JSON.stringify(lastLocation, null, 2) %></pre>
+            <% } else { %>
+                <p>No se ha recibido ninguna ubicación.</p>
+            <% } %>
+        </div>
+        <div class="location-image">
+            <img src="https://icones.pro/wp-content/uploads/2021/04/icones-de-localisation-de-la-carte-grise.png" alt="Location Image">
+        </div>
+    </div>
+    <%- include("partials/footer") %>
+
+    <script>
+        window.onload = function () {
+            console.log('lastLocation:','<%= JSON.stringify(lastLocation, null, 2) %>');
+        }
+    </script>
+</body>
+</html>

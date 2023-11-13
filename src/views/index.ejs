@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>MyPCTracker</title>
+    <%- include("partials/head") %>
+  </head>
+  <body>
+    <!-- HEADER -->
+    <%- include("partials/navigation") %>
+
+    <!-- MAIN CONTENT -->
+
+    <header
+      class="container vh-100 d-flex justify-content-center align-items-center"
+    >
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <img
+          src="/img/location.png"
+          class="w-25 m-auto animated bounceIn"
+          alt="Website Logo"
+        />
+        <h1 class="display-1 my-5 text-uppercase fw-bold">PC TRACKER</h1>
+        <a href="/tracker" class="btn btn-primary w-25">Probar Tracker</a>
+      </div>
+    </header>
+
+    <!-- section one -->
+    <div class="container-fluid" id="about">
+      <div class="row bg-dark text-white p-5 text-center">
+        <div class="col-md-4 offset-md-4">
+          <h3>MI PROYECTO</h3>
+          <p>
+            Hola este es mi proyecto.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <%- include("partials/footer") %>
+
+    <!-- JAVASCRIPT CDNS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
