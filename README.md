@@ -1,4 +1,3 @@
-```markdown
 # MYPCTRACKER
 
 MYPCTRACKER es un proyecto que permite enviar la ubicación de un PC desde PowerShell y visualizarla en una página web.
@@ -30,7 +29,6 @@ Asegúrate de tener Node.js y npm instalados en tu máquina antes de ejecutar el
 1. Instala las dependencias:
     
     ```bash
-    bashCopy code
     npm install
     
     ```
@@ -38,7 +36,6 @@ Asegúrate de tener Node.js y npm instalados en tu máquina antes de ejecutar el
 2. Ejecuta el servidor:
     
     ```bash
-    bashCopy code
     node index.js
     
     ```
@@ -50,7 +47,6 @@ Asegúrate de tener Node.js y npm instalados en tu máquina antes de ejecutar el
 Para enviar la ubicación desde PowerShell, utiliza el siguiente script:
 
 ```powershell
-powershellCopy code
 cls
 
 function Get-IPAddressLocation {
@@ -102,8 +98,12 @@ Asegúrate de personalizar el **`deviceId`** con un identificador único para tu
 ¡Disfruta rastreando la ubicación de tu PC con MYPCTRACKER!
 
 ```arduino
-arduinoCopy code
 
 Recuerda reemplazar `"tuusuario"` y `"ID_UNICO_DE_TU_DISPOSITIVO"` con tus detalles específicos. Este README debería proporcionar una descripción general y pasos básicos para ejecutar y utilizar tu proyecto.
 
 ```
+## CAPTURAS
+
+![Texto Alternativo]("C:\Users\unkno\Pictures\Screenshots\Captura de pantalla 2023-11-13 040126.png")
+
+![Texto Alternativo](""C:\Users\unkno\Pictures\Screenshots\Captura de pantalla 2023-11-13 040137.png"")
