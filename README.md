@@ -21,7 +21,7 @@ Asegúrate de tener Node.js y npm instalados en tu máquina antes de ejecutar el
 1. Clona este repositorio:
 
    ```bash
-   git clone https://github.com/tuusuario/mypctracker.git
+   git clone https://github.com/DJCARLOX/mypctracker.git
    cd mypctracker
 
 1. Instala las dependencias:
@@ -45,8 +45,9 @@ Asegúrate de tener Node.js y npm instalados en tu máquina antes de ejecutar el
 Para enviar la ubicación desde PowerShell, utiliza el siguiente script:
 
 ```powershell
-cls
 
+cls
+# Función para obtener la ubicación por geolocalización de IP
 function Get-IPAddressLocation {
     $IPAddress = (Invoke-RestMethod -Uri 'https://api64.ipify.org?format=json').ip
     $GeoData = (Invoke-RestMethod -Uri "https://ipapi.co/$IPAddress/json/")
@@ -63,14 +64,21 @@ function Get-IPAddressLocation {
     return $Location
 }
 
+# Obtener la ubicación
 $Ubicacion = Get-IPAddressLocation
+
+# Imprimir la ubicación en la consola antes de enviarla al servidor
+Write-Host "Ubicación a enviar al servicio web:"
+$Ubicacion | Format-Table
+
+# Enviar ubicación al servicio web
 
 $WebServiceUrl = "http://localhost:3000/send-notification"
 $NotificationData = @{
     title     = "Ubicacion del Portatil"
     message   = "Nueva ubicacion disponible."
-    deviceId  = "ID_UNICO_DE_TU_DISPOSITIVO"
-    ubicacion = $Ubicacion
+    deviceId  = "DJCARL0X"
+    ubicacion = $Ubicacion  # Enviar toda la ubicación como un objeto
 }
 
 try {
@@ -103,5 +111,9 @@ Recuerda reemplazar `"tuusuario"` y `"ID_UNICO_DE_TU_DISPOSITIVO"` con tus detal
 ## CAPTURAS
 
 ![Texto Alternativo](/src/public/img/index.png)
+
+![Texto Alternativo](/src/public/img/about.png)
+
+![Texto Alternativo](/src/public/img/contact.png)
 
 ![Texto Alternativo](/src/public/img/tracker.png)

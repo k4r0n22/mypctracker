@@ -1,12 +1,7 @@
-// En src/routes/index.js
 import { Router } from "express";
-import bodyParser from "body-parser";
-import { obtenerUltimaUbicacion } from '../locationStorage/locationStorage.js';
+import { obtenerUltimaUbicacion, actualizarUltimaUbicacion } from '../locationStorage/locationStorage.js';
 
 const router = Router();
-
-// Middleware para analizar JSON
-router.use(bodyParser.json());
 
 router.get("/", (req, res) => {
     res.render("index", { title: "MYPCTRACKER" });
@@ -22,6 +17,16 @@ router.get("/contact", (req, res) => {
 
 // Ruta para mostrar la página "tracker.ejs"
 router.get("/tracker", (req, res) => {
+    const lastLocation = obtenerUltimaUbicacion();
+    res.render("tracker", { lastLocation });
+});
+
+// Ruta para borrar la última ubicación
+router.get("/borrar-ubicacion", (req, res) => {
+    // Actualiza la última ubicación a null
+    actualizarUltimaUbicacion(null);
+    
+    // Redirige de vuelta a la página de tracker
     const lastLocation = obtenerUltimaUbicacion();
     res.render("tracker", { lastLocation });
 });

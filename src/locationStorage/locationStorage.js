@@ -1,4 +1,3 @@
-// En src/locationStorage.js
 let lastLocation = null;
 
 // Función para obtener la última ubicación

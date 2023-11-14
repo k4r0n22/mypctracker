@@ -10,7 +10,7 @@
 
     <style>
         h1 {
-            color: #2c3e50;
+            color: #ffffff;
             text-align: center;
             width: 100%;
             margin-top: 7%;
@@ -61,32 +61,48 @@
                 width: 100%;
             }
         }
+
+        .centered-btn {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 8%;
+        }
+        
+
     </style>
 </head>
 <body>
     <%- include("partials/navigation", { title: "MYPCTRACKER" }) %>
-
-
+    
     <h1>Rastreo de PC - Última Ubicación</h1>
     <div class="container">
         <div class="location-info">
             <% if (lastLocation) { %>
-                <p>Última ubicación recibida:</p>
-                <pre><%= JSON.stringify(lastLocation, null, 2) %></pre>
+                <p><span class="location-data">Dispositivo:</span> <%= lastLocation.deviceId %></p>
+                <p><span class="location-data">Título:</span> <%= lastLocation.title %></p>
+                <p><span class="location-data">Mensaje:</span> <%= lastLocation.message %></p>
+                <p><span class="location-data">Ubicación Aproximada:</span></p>
+                <p><span class="location-data">IP:</span> <%= lastLocation.IP || 'N/A' %></p>
+                <p><span class="location-data">Ciudad:</span> <%= lastLocation.Ciudad || 'N/A' %></p>
+                <p><span class="location-data">Región:</span> <%= lastLocation.Region || 'N/A' %></p>
+                <p><span class="location-data">País:</span> <%= lastLocation.Pais || 'N/A' %></p>
+                <p><span class="location-data">Latitud:</span> <%= lastLocation.Latitud || 'N/A' %></p>
+                <p><span class="location-data">Longitud:</span> <%= lastLocation.Longitud || 'N/A' %></p>
             <% } else { %>
-                <p>No se ha recibido ninguna ubicación.</p>
+                <p class="no-location">No se ha recibido ninguna ubicación.</p>
             <% } %>
         </div>
         <div class="location-image">
             <img src="https://icones.pro/wp-content/uploads/2021/04/icones-de-localisation-de-la-carte-grise.png" alt="Location Image">
         </div>
     </div>
-    <%- include("partials/footer") %>
+    <br>
+    <a href="/borrar-ubicacion" class="btn btn-primary w-25 centered-btn">Borrar</a>
 
-    <script>
-        window.onload = function () {
-            console.log('lastLocation:','<%= JSON.stringify(lastLocation, null, 2) %>');
-        }
-    </script>
+    <br>
+
+    <%- include("partials/footer") %>
 </body>
+
 </html>
