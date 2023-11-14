@@ -34,11 +34,11 @@ Asegúrate de tener Node.js y npm instalados en tu máquina antes de ejecutar el
 2. Ejecuta el servidor:
     
     ```bash
-    node index.js
+    npm run dev
     
     ```
     
-3. Abre tu navegador y visita http://localhost:3000/tracker para ver la página web y la última ubicación enviada desde PowerShell.
+3. Abre tu navegador y visita http://localhost:3000 para ver la página web y la última ubicación enviada desde PowerShell.
 
 ## **Uso**
 
@@ -47,7 +47,9 @@ Para enviar la ubicación desde PowerShell, utiliza el siguiente script:
 ```powershell
 
 cls
-# Función para obtener la ubicación por geolocalización de IP
+
+# OBTENER UBICACION POR GEOLOCALIZACION DE IP
+
 function Get-IPAddressLocation {
     $IPAddress = (Invoke-RestMethod -Uri 'https://api64.ipify.org?format=json').ip
     $GeoData = (Invoke-RestMethod -Uri "https://ipapi.co/$IPAddress/json/")
@@ -64,21 +66,22 @@ function Get-IPAddressLocation {
     return $Location
 }
 
-# Obtener la ubicación
+# OBTENER UBICACION
 $Ubicacion = Get-IPAddressLocation
+$equipo = hostname
 
-# Imprimir la ubicación en la consola antes de enviarla al servidor
+# VER EN CONSOLA
 Write-Host "Ubicación a enviar al servicio web:"
 $Ubicacion | Format-Table
 
-# Enviar ubicación al servicio web
+# ENVIAR AL SERVICIO WEB
 
 $WebServiceUrl = "http://localhost:3000/send-notification"
 $NotificationData = @{
     title     = "Ubicacion del Portatil"
     message   = "Nueva ubicacion disponible."
-    deviceId  = "DJCARL0X"
-    ubicacion = $Ubicacion  # Enviar toda la ubicación como un objeto
+    deviceId  = "$equipo"
+    ubicacion = $Ubicacion
 }
 
 try {
@@ -97,23 +100,23 @@ Write-Host "Pais: $($Ubicacion.Pais)"
 Write-Host "Latitud: $($Ubicacion.Latitud)"
 Write-Host "Longitud: $($Ubicacion.Longitud)"
 
+
 ```
 
 Asegúrate de personalizar el **`deviceId`** con un identificador único para tu dispositivo.
 
 ¡Disfruta rastreando la ubicación de tu PC con MYPCTRACKER!
 
-```arduino
-
-Recuerda reemplazar `"tuusuario"` y `"ID_UNICO_DE_TU_DISPOSITIVO"` con tus detalles específicos. Este README debería proporcionar una descripción general y pasos básicos para ejecutar y utilizar tu proyecto.
-
-```
 ## CAPTURAS
 
+### INICIO
 ![Texto Alternativo](/src/public/img/index.png)
 
+### ABOUT
 ![Texto Alternativo](/src/public/img/about.png)
 
+### CONTACT
 ![Texto Alternativo](/src/public/img/contact.png)
 
+### TRACKER
 ![Texto Alternativo](/src/public/img/tracker.png)

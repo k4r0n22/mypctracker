@@ -63,10 +63,12 @@
         }
 
         .centered-btn {
+            display: flex;
+            flex-direction: column;
             display: block;
             margin-left: auto;
             margin-right: auto;
-            margin-bottom: 8%;
+            margin-bottom: 2%;
         }
         
 
@@ -94,12 +96,18 @@
             <% } %>
         </div>
         <div class="location-image">
-            <img src="https://icones.pro/wp-content/uploads/2021/04/icones-de-localisation-de-la-carte-grise.png" alt="Location Image">
+            <img src="img/maps.png" alt="Location Image">
         </div>
     </div>
     <br>
     <a href="/borrar-ubicacion" class="btn btn-primary w-25 centered-btn">Borrar</a>
+    <a onclick="Refrescar()" class="btn btn-primary w-25 centered-btn">Ver</a>
 
+    <script>
+        function Refrescar() {
+            location.reload();
+        }
+    </script>
     <br>
 
     <%- include("partials/footer") %>

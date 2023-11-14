@@ -36,8 +36,6 @@ app.post('/send-notification', (req, res) => {
         ...ubicacion
     });
 
-    // Aquí deberías implementar la lógica para enviar notificaciones al dispositivo con el ID único `deviceId`
-    // Puedes usar alguna librería de notificaciones push o enviar mensajes a través de un canal que tu dispositivo pueda escuchar
 
     console.log(`Notificación enviada a dispositivo ${deviceId}: ${title} - ${message}`);
     res.status(200).send('Notificación enviada');
