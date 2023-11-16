@@ -48,6 +48,21 @@ Para enviar la ubicación desde PowerShell, utiliza el siguiente script:
 
 cls
 
+
+function Show-Banner {
+Write-Host
+Write-Host " ____   ____ _____ ____      _    ____ _  _______ ____  " -ForegroundColor Blue
+Write-Host "|  _ \ / ___|_   _|  _ \    / \  / ___| |/ / ____|  _ \ " -ForegroundColor Blue
+Write-Host "| |_) | |     | | | |_) |  / _ \| |   | ' /|  _| | |_) |" -ForegroundColor Blue
+Write-Host "|  __/| |___  | | |  _ <  / ___ \ |___| . \| |___|  _ < " -ForegroundColor Blue
+Write-Host "|_|    \____| |_| |_| \_\/_/   \_\____|_|\_\_____|_| \_\" -ForegroundColor Blue
+Write-host
+Write-host "  --------------------- by K4R0N ---------------------  " -ForegroundColor Green
+Write-host }
+
+Show-Banner
+
+
 # OBTENER UBICACION POR GEOLOCALIZACION DE IP
 
 function Get-IPAddressLocation {
@@ -86,10 +101,10 @@ $NotificationData = @{
 
 try {
     $response = Invoke-RestMethod -Uri $WebServiceUrl -Method Post -Body ($NotificationData | ConvertTo-Json) -ContentType 'application/json'
-    Write-Host "Respuesta del servidor: $response"
+    Write-Host "Respuesta del servidor: $response" -BackgroundColor Green
 }
 catch {
-    Write-Host "Error al enviar la solicitud al servidor. Detalles: $_"
+    Write-Host "Error al enviar la solicitud al servidor. Detalles: $_" -BackgroundColor DarkRed
 }
 
 Write-Host "Ubicación enviada al servicio web:"
