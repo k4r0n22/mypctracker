@@ -38,7 +38,7 @@ Asegúrate de tener Node.js y npm instalados en tu máquina antes de ejecutar el
     
     ```
     
-3. Abre tu navegador y visita http://localhost:3000 para ver la página web y la última ubicación enviada desde PowerShell.
+3. Abre tu navegador y visita https://mypctracker.up.railway.app para ver la página web y la última ubicación enviada desde PowerShell.
 
 ## **Uso**
 
