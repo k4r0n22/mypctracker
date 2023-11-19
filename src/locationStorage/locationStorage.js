@@ -1,6 +1,8 @@
+// locationStorage.js
+import { inicializarMapa } from "./googleMaps.js";
+
 let lastLocation = null;
 
-// Función para obtener la última ubicación
 const obtenerUltimaUbicacion = () => {
     return lastLocation;
 };
@@ -10,4 +12,20 @@ const actualizarUltimaUbicacion = (ubicacion) => {
     lastLocation = ubicacion;
 };
 
-export { obtenerUltimaUbicacion, actualizarUltimaUbicacion };
+// Función para actualizar la ubicación en el mapa
+const actualizarUbicacionMaps = () => {
+    if (lastLocation && lastLocation.Latitud && lastLocation.Longitud) {
+        // Llama a la función para inicializar el mapa
+        inicializarMapa();
+
+        // Añade un marcador en la nueva ubicación
+        var marker = new google.maps.Marker({
+            position: { lat: parseFloat(lastLocation.Latitud), lng: parseFloat(lastLocation.Longitud) },
+            // 'mapa' es la variable del mapa que se crea en la función inicializarMapa
+            map: mapa,
+            title: 'Nueva ubicación'
+        });
+    }
+};
+
+export { obtenerUltimaUbicacion, actualizarUltimaUbicacion, actualizarUbicacionMaps };

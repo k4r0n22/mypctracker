@@ -7,73 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rastreador de PC</title>
     <link rel="icon" type="image/x-icon" href="/img/icon.png">
+    
     <%- include("partials/head") %>
 
-    <style>
-        h1 {
-            color: #ffffff;
-            text-align: center;
-            width: 100%;
-            margin-top: 7%;
-        }
+    <!-- Agrega el script de Google Maps -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrAabDt2aSsFpS8ezt1sMXcnx2JNhQP18&callback=inicializarMapa"></script>
 
-        .container {
-            display: flex;
-            flex-direction: row;
-            width: 80%;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    <!-- Agrega la función de inicialización del mapa -->
+    <script>
+        function inicializarMapa() {
+            var mapa = new google.maps.Map(document.getElementById('mapa'), {
+                center: { lat: -34.397, lng: 150.644 },
+                zoom: 8
+            });
         }
+    </script>
 
-        .location-info {
-            width: 100%;
-            margin-bottom: 20px;
-        }
+    <script>
+        window.onload = function() {
+            // Llama a la función para actualizar la ubicación en el mapa
+            actualizarUbicacionMaps();
+        };
+    </script>
 
-        .location-image {
-            text-align: center;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            float: right;
-        }
-
-        p {
-            margin-bottom: 8px;
-            font-size: 16px;
-        }
-
-        .location-data {
-            font-weight: bold;
-            color: #3498db;
-        }
-
-        .no-location {
-            color: #888;
-            text-align: center;
-        }
-
-        /* Media Query para dispositivos con pantalla de hasta 600px (smartphones) */
-        @media (max-width: 600px) {
-            .container {
-                width: 100%;
-            }
-        }
-
-        .centered-btn {
-            display: flex;
-            flex-direction: column;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            margin-bottom: 2%;
-        }
-        
-
-    </style>
 </head>
 <body>
     <%- include("partials/navigation", { title: "MYPCTRACKER" }) %>
@@ -96,8 +52,9 @@
                 <p class="no-location">No se ha recibido ninguna ubicación.</p>
             <% } %>
         </div>
+        <!-- Agrega el contenedor para el mapa -->
         <div class="location-image">
-            <img src="img/maps.png" alt="Location Image">
+            <div id="mapa" style="width: 300px; height: 300px;"></div>
         </div>
     </div>
     <br>
@@ -113,5 +70,4 @@
 
     <%- include("partials/footer") %>
 </body>
-
 </html>

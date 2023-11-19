@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { obtenerUltimaUbicacion, actualizarUltimaUbicacion } from '../locationStorage/locationStorage.js';
+import { obtenerUltimaUbicacion, actualizarUltimaUbicacion, actualizarUbicacionMaps } from '../locationStorage/locationStorage.js';
 
 const router = Router();
 
@@ -18,6 +18,8 @@ router.get("/contact", (req, res) => {
 router.get("/tracker", (req, res) => {
     const lastLocation = obtenerUltimaUbicacion();
     res.render("tracker", { lastLocation });
+    const Maps = actualizarUbicacionMaps();
+    res.render("tracker", { Maps });
 });
 
 router.get("/borrar-ubicacion", (req, res) => {
