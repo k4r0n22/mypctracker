@@ -22,6 +22,19 @@ router.get("/tracker", (req, res) => {
     res.render("tracker", { Maps });
 });
 
+router.get("/login", (req, res) => {
+    res.render("login", { title: "Login" });
+});
+
+router.post('/formulario', (req, res) => {
+    const login = req.body.login;
+    const passwd = req.body.passwd;
+
+    if (login === 'carlos' && passwd === '1234') {
+        res.redirect('/tracker');
+    }
+});
+
 router.get("/borrar-ubicacion", (req, res) => {
     actualizarUltimaUbicacion(null);
     res.redirect("/tracker");

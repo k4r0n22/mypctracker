@@ -70,6 +70,10 @@ p {
   .container {
       width: 100%;
   }
+  .mapa {
+    max-width: 200px;
+    height: 200px;
+  }
 }
 
 .centered-btn {

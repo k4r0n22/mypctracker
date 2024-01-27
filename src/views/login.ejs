@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Login Page</title>
+        <link rel="icon" type="image/x-icon" href="/img/icon.png">
+        <%- include("partials/head") %>
+        <style>
+        body {
+            background: #202020;
+            color: white;
+        }
+
+        .navbar-brand {
+            font-family: 'Spicy Rice', cursive;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            text-transform: uppercase;
+            font-family: 'Spicy Rice', cursive;
+        }
+
+        header img {
+            width: 60%;
+        }
+
+        h1 {
+            color: #ffffff;
+            text-align: center;
+            width: 100%;
+            margin-top: 7%;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            width: 80%;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .card {
+            animated: flipInY;
+            background: #202020;
+            border: 1px solid #6c757d;
+            border-radius: 8px;
+            margin: auto;
+            padding: 20px;
+            width: 300px;
+        }
+
+        .card-header {
+            background: #202020;
+            color: white;
+            text-align: center;
+        }
+
+        .form-control {
+            background: #343a40;
+            border: 1px solid #6c757d;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            border: 1px solid #007bff;
+        }
+        </style>
+    </head>
+    <body>
+        <%- include("partials/navigation") %>
+
+        <div class="login-container">
+        <div class="card">
+            <div class="card-header">
+            <h3>Login</h3>
+            </div>
+            <div class="card-body">
+            <form action="\formulario">
+                <div class="mb-3">
+                <label for="login">Email:</label>
+                <input class="form-control" type="text" placeholder="Email" />
+                </div>
+                <div class="mb-3">
+                <label for="passwd">Password:</label>
+                <input
+                    class="form-control"
+                    type="password"
+                    placeholder="Password"
+                />
+                </div>
+                <button class="btn btn-primary btn-block">Login</button>
+            </form>
+            </div>
+        </div>
+        </div>
+
+        <%- include("partials/footer") %>
+    </body>
+</html>
