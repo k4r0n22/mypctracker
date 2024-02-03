@@ -1,3 +1,4 @@
+// index.js
 import express from "express";
 import morgan from "morgan";
 import cors from 'cors';
@@ -5,6 +6,7 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import bodyParser from "body-parser";
 import indexRoutes from "./routes/index.js";
+import { pool } from "./db/db.js";
 import { actualizarUltimaUbicacion } from "./locationStorage/locationStorage.js";
 import mysql from 'mysql';
 
@@ -23,44 +25,51 @@ app.use(indexRoutes);
 
 app.use(express.static(join(__dirname, "public")));
 
+// FUNCION PARA GENERAR UN ID UNICO
+function generateUniqueId(min, max) {
+    const numeroAleatorio = Math.random();
+    const resultado = min + Math.floor(numeroAleatorio * (max - min + 1));
+    return resultado;
+}
+
 // Ruta para recibir datos de ubicación y enviar notificación
-app.post('/send-notification', (req, res) => {
+app.post('/send-notification', async (req, res) => {
     const { title, message, deviceId, ubicacion } = req.body;
 
     console.log('Datos recibidos:', JSON.stringify(req.body, null, 2));
 
+    const { Region, Pais, IP, Longitud, Ciudad, Latitud } = ubicacion;
+
     // Actualiza la última ubicación (locationStorage.js)
     actualizarUltimaUbicacion({
-        title,
-        message,
-        deviceId,
-        ...ubicacion
+        Region,
+        Pais,
+        IP,
+        Longitud,
+        Ciudad,
+        Latitud
     });
 
-    console.log(`Notificación enviada a dispositivo ${deviceId}: ${title} - ${message}`);
-    res.status(200).send('Notificación enviada');
-});
+    console.log(`Notificación enviada a dispositivo: ${IP} - ${Ciudad} - ${Region} - ${Pais} - ${Latitud} - ${Longitud}`);
 
-// CONEXIÓN CON LA BASE DE DATOS
-const mysqlConnection = mysql.createPool({
-    host: '192.168.1.216',
-    user: 'admin',
-    password: 'Andel1928',
-    database: 'tracker',
-    multipleStatements: true,
-    connectionLimit: 10, // Adjust as needed
-});
+    const uniqueId = generateUniqueId(1, 1000);
 
-mysqlConnection.getConnection((err, connection) => {
-    if (err) {
-        console.log('Connection Failed!', err);
-    } else {
-        console.log('Conexion bbdd correcta...');
-        connection.release();
+    // Me creo una cadena que tiene el SQL que voy a lanzar a la base de datos
+    const sql = `INSERT INTO ubicacion (id, ip, ciudad, region, pais, Latitud, Longitud) VALUES ('${uniqueId}', '${IP}', '${Ciudad}', '${Region}', '${Pais}', '${Latitud}', '${Longitud}')`;
+
+    console.log(sql);
+
+    try {
+        // Lanzo la query using async/await
+        await pool.query(sql);
+        console.log("Ubicación insertada correctamente");
+        res.status(200).send('Notificación enviada');
+    } catch (err) {
+        console.log("Error al insertar ubicación:", err);
+        res.status(500).send('Error al procesar la solicitud');
     }
 });
 
 app.listen(app.get("port"), () => {
     console.log("Server on port", app.get("port"));
 });
-
