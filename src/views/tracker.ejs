@@ -32,11 +32,13 @@
 
 </head>
 <body>
-    <%- include("partials/navigation", { title: "MYPCTRACKER" }) %>
-    
     <h1>Rastreo de PC - Última Ubicación</h1>
+    <% if (typeof username !== 'undefined') { %>
+        <h2>Hola <%= username %></h2>
+    <% } %>
     <div class="container">
         <div class="location-info">
+            <% if (typeof username !== 'undefined') { %>
             <% if (lastLocation) { %>
                 <p><span class="location-data">Dispositivo:</span> <%= lastLocation.deviceId %></p>
                 <p><span class="location-data">Título:</span> <%= lastLocation.title %></p>
@@ -50,6 +52,7 @@
                 <p><span class="location-data">Longitud:</span> <%= lastLocation.Longitud || 'N/A' %></p>
             <% } else { %>
                 <p class="no-location">No se ha recibido ninguna ubicación.</p>
+            <% } %>
             <% } %>
         </div>
         <div class="location-image">

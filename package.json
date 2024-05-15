@@ -1,7 +1,7 @@
 {
   "name": "mypctracker",
   "version": "1.0.0",
-  "description": "",
+  "description": "MYPCTRACKER es un proyecto que permite enviar la ubicación de un PC desde PowerShell y visualizarla en una página web.",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -12,14 +12,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
+    "cookie-session": "^2.1.0",
     "cors": "^2.8.5",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
+    "express-mysql-session": "^3.0.2",
+    "express-session": "^1.18.0",
+    "mongoose": "^8.3.4",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "mysql2": "^3.9.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.22"
+    "nodemon": "^3.1.0"
   }
 }
