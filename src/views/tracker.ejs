@@ -32,10 +32,11 @@
 
 </head>
 <body>
+    <!-- HEADER -->
+    <%- include("partials/navigation", { title: "TRACKER" }) %>
+
     <h1>Rastreo de PC - Última Ubicación</h1>
-    <% if (typeof username !== 'undefined') { %>
-        <h2>Hola <%= username %></h2>
-    <% } %>
+
     <div class="container">
         <div class="location-info">
             <% if (typeof username !== 'undefined') { %>
