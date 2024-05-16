@@ -52,7 +52,7 @@ app.use(express.static(join(__dirname, "public")));
 
 // Ruta para recibir datos de ubicación y enviar notificación
 app.post('/send-notification', async (req, res) => {
-    const { title, message, deviceId, ubicacion } = req.body;
+    const { title, message, deviceId, ubicacion, userId } = req.body; // Asegúrate de recibir el userId
 
     console.log('Datos recibidos:', JSON.stringify(req.body, null, 2));
 
@@ -71,13 +71,11 @@ app.post('/send-notification', async (req, res) => {
     console.log(`Notificación enviada a dispositivo: ${IP} - ${Ciudad} - ${Region} - ${Pais} - ${Latitud} - ${Longitud}`);
 
     // Me creo una cadena que tiene el SQL que voy a lanzar a la base de datos
-    const sql = `INSERT INTO ubicacion (ip, ciudad, region, pais, Latitud, Longitud) VALUES ('${IP}', '${Ciudad}', '${Region}', '${Pais}', '${Latitud}', '${Longitud}')`;
-
-    console.log(sql);
+    const sql = `INSERT INTO ubicacion (userId, ip, ciudad, region, pais, latitud, longitud) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
     try {
         // Lanzo la query using async/await
-        await pool.query(sql);
+        await pool.query(sql, [userId, IP, Ciudad, Region, Pais, Latitud, Longitud]);
         console.log("Ubicación insertada correctamente");
         res.status(200).send('Notificación enviada');
     } catch (err) {
@@ -85,6 +83,7 @@ app.post('/send-notification', async (req, res) => {
         res.status(500).send('Error al procesar la solicitud');
     }
 });
+
 
 app.post('/register', async (req, res) => {
     const { username, email, password } = req.body;

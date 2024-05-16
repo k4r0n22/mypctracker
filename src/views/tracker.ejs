@@ -1,4 +1,3 @@
-<!-- En tracker.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +33,7 @@
 <body>
     <!-- HEADER -->
     <%- include("partials/navigation", { title: "TRACKER" }) %>
-
+        
     <h1>Rastreo de PC - Última Ubicación</h1>
 
     <div class="container">
@@ -45,12 +44,12 @@
                 <p><span class="location-data">Título:</span> <%= lastLocation.title %></p>
                 <p><span class="location-data">Mensaje:</span> <%= lastLocation.message %></p>
                 <p><span class="location-data">Ubicación Aproximada:</span></p>
-                <p><span class="location-data">IP:</span> <%= lastLocation.IP || 'N/A' %></p>
-                <p><span class="location-data">Ciudad:</span> <%= lastLocation.Ciudad || 'N/A' %></p>
-                <p><span class="location-data">Región:</span> <%= lastLocation.Region || 'N/A' %></p>
-                <p><span class="location-data">País:</span> <%= lastLocation.Pais || 'N/A' %></p>
-                <p><span class="location-data">Latitud:</span> <%= lastLocation.Latitud || 'N/A' %></p>
-                <p><span class="location-data">Longitud:</span> <%= lastLocation.Longitud || 'N/A' %></p>
+                <p><span class="location-data">IP:</span> <%= lastLocation.ip || 'N/A' %></p>
+                <p><span class="location-data">Ciudad:</span> <%= lastLocation.ciudad || 'N/A' %></p>
+                <p><span class="location-data">Región:</span> <%= lastLocation.region || 'N/A' %></p>
+                <p><span class="location-data">País:</span> <%= lastLocation.pais || 'N/A' %></p>
+                <p><span class="location-data">Latitud:</span> <%= lastLocation.latitud || 'N/A' %></p>
+                <p><span class="location-data">Longitud:</span> <%= lastLocation.longitud || 'N/A' %></p>
             <% } else { %>
                 <p class="no-location">No se ha recibido ninguna ubicación.</p>
             <% } %>

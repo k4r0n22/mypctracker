@@ -30,20 +30,38 @@
             About
           </a>
         </li>
-        <!--<li class="nav-item">
-          <a class="nav-link d-flex align-items-center" href="/tracker">
-            <span class="material-symbols-outlined">pin_drop</span>
-            Tracker
-          </a>
-        </li>-->
-        <!-- Botón de Registro -->
-        <li class="nav-item">
-          <a class="nav-link d-flex align-items-center" href="/register">
-            <span class="material-symbols-outlined">how_to_reg</span>
-          </a>
+        <% if (!loggedin) { %>
+          <!-- Botón de Registro -->
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center" href="/register">
+              <span class="material-symbols-outlined">how_to_reg</span>
+              Register
+            </a>
           </li>
-        <!-- Botón de Login -->
-        <!-- Botón de Logout -->
+          <!-- Botón de Login -->
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center" href="/login">
+              <span class="material-symbols-outlined">login</span>
+              Login
+            </a>
+          </li>
+        <% } else { %>
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center">
+              <span class="material-symbols-outlined">
+                account_circle
+              </span>
+              <%= username %>
+            </a>
+          </li>
+          <!-- Botón de Logout -->
+          <li class="nav-item">
+            <a class="nav-link d-flex align-items-center" href="/logout">
+              <span class="material-symbols-outlined">logout</span>
+              Logout
+            </a>
+          </li>
+        <% } %>
       </ul>
     </div>
   </div>
