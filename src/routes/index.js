@@ -6,7 +6,6 @@ import bcrypt from 'bcrypt';
 
 const router = Router();
 
-// Middleware para verificar el estado de inicio de sesión
 const requireLogin = (req, res, next) => {
     if (!req.session.loggedin) {
         res.redirect("/login");
@@ -14,6 +13,23 @@ const requireLogin = (req, res, next) => {
         next();
     }
 };
+
+router.post("/send-notification", async (req, res) => {
+    const { title, message, deviceId, ubicacion, userId } = req.body;
+
+    console.log('Datos recibidos:', req.body);
+
+    try {
+        const sql = `INSERT INTO ubicacion (userId, ip, ciudad, region, pais, latitud, longitud) VALUES (?, ?, ?, ?, ?, ?, ?)`;
+        await pool.query(sql, [userId, ubicacion.IP, ubicacion.Ciudad, ubicacion.Region, ubicacion.Pais, ubicacion.Latitud, ubicacion.Longitud]);
+
+        console.log(`Notificación enviada a dispositivo: ${ubicacion.IP} - ${ubicacion.Ciudad} - ${ubicacion.Region} - ${ubicacion.Pais} - ${ubicacion.Latitud} - ${ubicacion.Longitud}`);
+        res.send('Ubicación recibida y almacenada');
+    } catch (error) {
+        console.error('Error al insertar ubicación:', error);
+        res.status(500).send('Error al procesar la solicitud');
+    }
+});
 
 router.get("/", (req, res) => {
     res.redirect("/index");
@@ -93,9 +109,11 @@ router.get("/logout", (req, res) => {
 });
 
 router.get("/borrar-ubicacion", (req, res) => {
+    console.log("Borrando la ubicación...");
     actualizarUltimaUbicacion(null);
     res.redirect("/tracker");
 });
+
 
 router.get('/register', (req, res) => {
     res.render('register', { title: 'Register', loggedin: req.session.loggedin, username: req.session.username });

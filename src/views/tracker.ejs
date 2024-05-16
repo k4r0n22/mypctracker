@@ -2,74 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rastreador de PC</title>
-    <link rel="icon" type="image/x-icon" href="/img/icon.png">
-    
-    <%- include("partials/head") %>
-
-    <!-- Agrega el script de Google Maps -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrAabDt2aSsFpS8ezt1sMXcnx2JNhQP18&callback=inicializarMapa"></script>
-
-    <!-- Agrega la función de inicialización del mapa -->
-    <script>
-        function inicializarMapa() {
-            var mapa = new google.maps.Map(document.getElementById('mapa'), {
-                center: { lat: 40.2786, lng: -3.7867 },
-                zoom: 8
-            });
+    <title>Tracker</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrAabDt2aSsFpS8ezt1sMXcnx2JNhQP18&callback=inicializarMapa"></script>
+    <style>
+        #map {
+            height: 500px;
+            width: 100%;
         }
-    </script>
-
-    <script>
-        window.onload = function() {
-            // Llama a la función para actualizar la ubicación en el mapa
-            actualizarUbicacionMaps();
-        };
-    </script>
-
+    </style>
+    <%- include("partials/head") %>
 </head>
 <body>
+
     <!-- HEADER -->
     <%- include("partials/navigation", { title: "TRACKER" }) %>
-        
-    <h1>Rastreo de PC - Última Ubicación</h1>
+
+    <h1>Ubicación del Dispositivo</h1>
 
     <div class="container">
         <div class="location-info">
-            <% if (typeof username !== 'undefined') { %>
-            <% if (lastLocation) { %>
-                <p><span class="location-data">Dispositivo:</span> <%= lastLocation.deviceId %></p>
-                <p><span class="location-data">Título:</span> <%= lastLocation.title %></p>
-                <p><span class="location-data">Mensaje:</span> <%= lastLocation.message %></p>
-                <p><span class="location-data">Ubicación Aproximada:</span></p>
-                <p><span class="location-data">IP:</span> <%= lastLocation.ip || 'N/A' %></p>
-                <p><span class="location-data">Ciudad:</span> <%= lastLocation.ciudad || 'N/A' %></p>
-                <p><span class="location-data">Región:</span> <%= lastLocation.region || 'N/A' %></p>
-                <p><span class="location-data">País:</span> <%= lastLocation.pais || 'N/A' %></p>
-                <p><span class="location-data">Latitud:</span> <%= lastLocation.latitud || 'N/A' %></p>
-                <p><span class="location-data">Longitud:</span> <%= lastLocation.longitud || 'N/A' %></p>
-            <% } else { %>
-                <p class="no-location">No se ha recibido ninguna ubicación.</p>
-            <% } %>
-            <% } %>
-        </div>
-        <div class="location-image">
-            <div id="mapa" class="mapa" style="width: 300px; height: 300px;"></div>
+    <% if (lastLocation) { %>
+        <p>Dispositivo: <%= lastLocation.deviceId %></p>
+        <p>IP: <%= lastLocation.IP %></p>
+        <p>Ciudad: <%= lastLocation.Ciudad %></p>
+        <p>Región: <%= lastLocation.Region %></p>
+        <p>País: <%= lastLocation.Pais %></p>
+        <p>Latitud: <%= lastLocation.Latitud %></p>
+        <p>Longitud: <%= lastLocation.Longitud %></p>
         </div>
     </div>
-    <br>
-    <a href="/borrar-ubicacion" class="btn btn-primary w-25 centered-btn">Borrar</a>
-    <a onclick="Refrescar()" class="btn btn-primary w-25 centered-btn">Ver</a>
+        <div id="map"></div>
+        <script>
+            function initMap() {
+                var location = { lat: <%= lastLocation.Latitud %>, lng: <%= lastLocation.Longitud %> };
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 15,
+                    center: location
+                });
+                var marker = new google.maps.Marker({
+                    position: location,
+                    map: map
+                });
+            }
 
-    <script>
-        function Refrescar() {
-            location.reload();
-        }
-    </script>
-    <br>
+            window.onload = initMap;
+        </script>
+    <% } else { %>
+        <p>No hay datos de ubicación disponibles.</p>
+    <% } %>
 
+    <form action="/borrar-ubicacion" method="get">
+        <button type="submit">Borrar</button>
+    </form>
     <%- include("partials/footer") %>
 </body>
 </html>
