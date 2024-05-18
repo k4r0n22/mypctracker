@@ -15,13 +15,14 @@ const requireLogin = (req, res, next) => {
 };
 
 router.post("/send-notification", async (req, res) => {
-    const { title, message, deviceId, ubicacion, userId } = req.body;
+    const {deviceId, ubicacion, userId } = req.body;
 
-    console.log('Datos recibidos:', req.body);
+    //console.log('Datos recibidos:', req.body);
+    console.log(userId, deviceId);
 
     try {
         const sql = `INSERT INTO ubicacion (userId, ip, ciudad, region, pais, latitud, longitud) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-        await pool.query(sql, [userId, ubicacion.IP, ubicacion.Ciudad, ubicacion.Region, ubicacion.Pais, ubicacion.Latitud, ubicacion.Longitud]);
+        await pool.query(sql, [userId, ubicacion.IP, ubicacion.Ciudad, ubicacion.Region, ubicacion.Pais, ubicacion.Latitud, ubicacion.Longitud, deviceId]);
 
         console.log(`Notificación enviada a dispositivo: ${ubicacion.IP} - ${ubicacion.Ciudad} - ${ubicacion.Region} - ${ubicacion.Pais} - ${ubicacion.Latitud} - ${ubicacion.Longitud}`);
         res.send('Ubicación recibida y almacenada');
@@ -47,6 +48,10 @@ router.get("/contact", (req, res) => {
     res.render("contact", { title: "Contact Page", loggedin: req.session.loggedin, username: req.session.username });
 });
 
+router.get("/account", (req, res) => {
+    res.render("account", { title: "Your Account", loggedin: req.session.loggedin, username: req.session.username });
+});
+
 router.get('/tracker', requireLogin, async (req, res) => {
     try {
         const userId = req.session.username;
@@ -60,6 +65,21 @@ router.get('/tracker', requireLogin, async (req, res) => {
         res.status(500).send('Error al procesar la solicitud');
     }
 });
+
+router.get('/historial', requireLogin, async (req, res) => {
+    try {
+        const userId = req.session.username;
+        const sql = 'SELECT * FROM ubicacion WHERE userId = ? ORDER BY fecha DESC';
+        const [rows] = await pool.query(sql, [userId]);
+
+        res.render("historial", { locations: rows, title: "Historial de Ubicaciones", username: userId, loggedin: req.session.loggedin });
+    } catch (error) {
+        console.error('Error al obtener el historial de ubicaciones:', error);
+        res.status(500).send('Error al procesar la solicitud');
+    }
+});
+
+
 
 router.get("/login", (req, res) => {
     res.render("login", { title: "Login", loggedin: req.session.loggedin, username: req.session.username });

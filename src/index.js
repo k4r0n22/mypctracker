@@ -52,9 +52,9 @@ app.use(express.static(join(__dirname, "public")));
 
 // Ruta para recibir datos de ubicación y enviar notificación
 app.post('/send-notification', async (req, res) => {
-    const { title, message, deviceId, ubicacion } = req.body;
+    const {deviceId, ubicacion } = req.body;
 
-    console.log('Datos recibidos:', JSON.stringify(req.body, null, 2));
+    //console.log('Datos recibidos:', JSON.stringify(req.body, null, 2));
 
     const { Region, Pais, IP, Longitud, Ciudad, Latitud } = ubicacion;
 
