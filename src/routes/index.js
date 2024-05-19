@@ -66,6 +66,20 @@ router.get('/tracker', requireLogin, async (req, res) => {
     }
 });
 
+router.get('/downloads', requireLogin, async (req, res) => {
+    try {
+        const userId = req.session.username;
+        const sql = 'SELECT * FROM ubicacion WHERE userId = ? ORDER BY id DESC LIMIT 1';
+        const [rows] = await pool.query(sql, [userId]);
+
+        const lastLocation = rows.length > 0 ? rows[0] : null;
+        res.render("downloads", { lastLocation, title: "Downloads", username: userId, loggedin: req.session.loggedin });
+    } catch (error) {
+        console.error('Error al obtener la última ubicación:', error);
+        res.status(500).send('Error al procesar la solicitud');
+    }
+});
+
 router.get('/historial', requireLogin, async (req, res) => {
     try {
         const userId = req.session.username;

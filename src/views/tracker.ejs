@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tracker</title>
+    <link rel="icon" type="image/x-icon" href="/img/icon.png">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDrAabDt2aSsFpS8ezt1sMXcnx2JNhQP18&callback=inicializarMapa"></script>
     <style>
         #map {
@@ -24,7 +25,6 @@
         <div class="location-info">
     <% if (lastLocation) { %>
         <p>Dispositivo: <%= lastLocation.deviceId %></p>
-        <p>IP: <%= lastLocation.IP %></p>
         <p>Ciudad: <%= lastLocation.Ciudad %></p>
         <p>Región: <%= lastLocation.Region %></p>
         <p>País: <%= lastLocation.Pais %></p>
@@ -51,8 +51,8 @@
     <% } else { %>
         <p>No hay datos de ubicación disponibles.</p>
     <% } %>
-    <form action="/borrar-ubicacion" method="get">
-        <button type="submit">Borrar</button>
+    <form>
+        <a href="/downloads" class="btn btn-primary w-25">Haz clic aquí para descargar el ejecutable</a>
     </form>
     <%- include("partials/footer") %>
 </body>
