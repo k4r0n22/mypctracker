@@ -206,7 +206,7 @@ try {
     $Ubicacion | Format-Table
 
     # ENVIAR AL SERVICIO WEB
-    $WebServiceUrl = "http://localhost:3000/send-notification/"
+    $WebServiceUrl = "https://mypctracker.up.railway.app/send-notification/"
     $NotificationData = @{
         title     = "Ubicacion del Portatil"
         message   = "Nueva ubicacion disponible."
