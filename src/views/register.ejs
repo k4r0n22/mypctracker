@@ -80,8 +80,8 @@
 <body>
     <%- include("partials/navigation") %>
 
-    <div class="login-container">
-        <div class="card">
+    <div class="container vh-100 d-flex justify-content-center align-items-center">
+        <div class="card animated flipInY bg-dark p-3 border-secondary">
             <div class="card-header">
                 <h3>Register</h3>
             </div>
@@ -90,24 +90,24 @@
                 <form action="/register" method="POST">
                     <div class="mb-3">
                         <label for="username">Username:</label>
-                        <input class="form-control" type="text" name="username" placeholder="Username" required> <!-- Campo de nombre de usuario -->
+                        <input class="form-control" type="text" name="username" placeholder="Username" required>
                     </div>
                     <div class="mb-3">
                         <label for="email">Email:</label>
-                        <input class="form-control" type="email" name="email" placeholder="Email" required> <!-- Campo de correo electrónico -->
+                        <input class="form-control" type="email" name="email" placeholder="Email" required>
                     </div>
                     <div class="mb-3">
                         <label for="password">Password:</label>
-                        <input class="form-control" type="password" name="password" placeholder="Password" required> <!-- Campo de contraseña -->
+                        <input class="form-control" type="password" name="password" placeholder="Password" required>
                     </div>
-                    <button class="btn btn-primary btn-block" type="submit">Register</button> <!-- Botón de registro -->
+                    <button class="btn btn-primary btn-block" type="submit">Register</button>
                     <br>
                     <br>
                     <br>
                     <div class="mb-3">
                         <label for="login">Ya tienes una cuenta?</label>
                         
-                        <a href="/login" class="btn btn-primary ">Login</a> <!-- Botón de ir a login -->
+                        <a href="/login" class="btn btn-primary ">Login</a>
                     </div>
                 </form>
             </div>

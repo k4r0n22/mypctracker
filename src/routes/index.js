@@ -13,13 +13,13 @@ const requireLogin = (req, res, next) => {
 };
 
 router.post("/send-notification", async (req, res) => {
-    const {deviceId, ubicacion, userId } = req.body;
+    const {deviceId, ubicacion, userId, fecha} = req.body;
 
-    console.log(userId, deviceId);
+    console.log(userId, deviceId, fecha);
 
     try {
-        const sql = `INSERT INTO ubicacion (userId, ip, ciudad, region, pais, latitud, longitud) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-        await pool.query(sql, [userId, ubicacion.IP, ubicacion.Ciudad, ubicacion.Region, ubicacion.Pais, ubicacion.Latitud, ubicacion.Longitud]);
+        const sql = `INSERT INTO ubicacion (userId, fecha, ip, ciudad, region, pais, latitud, longitud) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+        await pool.query(sql, [userId, fecha, ubicacion.IP, ubicacion.Ciudad, ubicacion.Region, ubicacion.Pais, ubicacion.Latitud, ubicacion.Longitud]);
 
         console.log(`Notificación enviada a dispositivo: ${ubicacion.IP} - ${ubicacion.Ciudad} - ${ubicacion.Region} - ${ubicacion.Pais} - ${ubicacion.Latitud} - ${ubicacion.Longitud}`);
         res.send('Ubicación recibida y almacenada');
