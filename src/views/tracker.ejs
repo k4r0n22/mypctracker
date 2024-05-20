@@ -24,12 +24,12 @@
     <div class="container">
         <div class="location-info">
     <% if (lastLocation) { %>
-        <p>Dispositivo: <%= lastLocation.deviceId %></p>
-        <p>Ciudad: <%= lastLocation.Ciudad %></p>
-        <p>Región: <%= lastLocation.Region %></p>
-        <p>País: <%= lastLocation.Pais %></p>
-        <p>Latitud: <%= lastLocation.Latitud %></p>
-        <p>Longitud: <%= lastLocation.Longitud %></p>
+        <p><strong>IP:</strong> <%= lastLocation.ip %></p>
+        <p><strong>Ciudad:</strong> <%= lastLocation.ciudad %></p>
+        <p><strong>Región:</strong> <%= lastLocation.region %></p>
+        <p><strong>País:</strong> <%= lastLocation.pais %></p>
+        <p><strong>Latitud:</strong> <%= lastLocation.Latitud %></p>
+        <p><strong>Longitud:</strong> <%= lastLocation.Longitud %></p>
         </div>
     </div>
         <div id="map"></div>
